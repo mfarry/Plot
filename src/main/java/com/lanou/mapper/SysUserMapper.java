@@ -5,6 +5,8 @@ import com.lanou.bean.User;
 import java.util.List;
 
 public interface SysUserMapper {
+
+    //根据id删除
     int deleteByPrimaryKey(Integer id);
 
 //    添加
@@ -24,4 +26,6 @@ public interface SysUserMapper {
 
     //显示全部
     List<User> findAll();
+
+
 }

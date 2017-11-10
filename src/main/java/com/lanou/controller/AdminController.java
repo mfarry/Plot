@@ -54,7 +54,7 @@ public class AdminController {
         return new AjaxResult(all);
     }
 
-//添加
+    //添加
     @ResponseBody
     @RequestMapping(value = "/adminaddall")
     public AjaxResult adminAdd(User sysUser){
@@ -62,6 +62,15 @@ public class AdminController {
         sysUser.setCreateTime(new Date());
         Integer insert = sysUserService.insert(sysUser);
         return new AjaxResult(insert);
+    }
+
+    //根据id删除
+    @ResponseBody
+    @RequestMapping(value = "/admindelete")
+    public AjaxResult adminDelete(Integer id){
+        Integer integer = sysUserService.deletByUserId(id);
+        return new AjaxResult(integer);
+
     }
 
 }
