@@ -7,7 +7,8 @@ import java.util.List;
 public interface SysUserMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(User record);
+//    添加
+    Integer insert(User record);
 
     int insertSelective(User record);
 
@@ -20,6 +21,7 @@ public interface SysUserMapper {
     // 登录
     User selectlognameandpwd(String username);
 
-    //查看全部(管理员)
-    List<User> findAlladmin();
+
+    //显示全部
+    List<User> findAll();
 }

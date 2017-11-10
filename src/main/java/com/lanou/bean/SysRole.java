@@ -1,6 +1,7 @@
 package com.lanou.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class SysRole {
     private Integer id;
@@ -21,14 +22,16 @@ public class SysRole {
 
     private String remark;
 
-private User user;
+List<User>userList;
 
-    public User getUser() {
-        return user;
+
+
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 
     public Integer getId() {
@@ -116,7 +119,7 @@ private User user;
                 ", updateTime=" + updateTime +
                 ", updateId=" + updateId +
                 ", remark='" + remark + '\'' +
-                ", user=" + user +
+                ", userList=" + userList +
                 '}';
     }
 }

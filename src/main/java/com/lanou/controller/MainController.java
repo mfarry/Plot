@@ -99,19 +99,6 @@ public class MainController {
     }
 
 
-    @RequestMapping(value = "/admin_list")
-    public String adminlist(){
-        return "admin-list";
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/getAdminlist")
-    public AjaxResult adlist(){
-        List<User> userList = sysUserService.findalladmin();
-        System.out.println(userList);
-        return new AjaxResult(userList);
-
-}
 
 
 

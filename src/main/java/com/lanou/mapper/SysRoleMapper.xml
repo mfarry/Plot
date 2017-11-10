@@ -10,7 +10,7 @@
     <result column="create_id" jdbcType="INTEGER" property="createId" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="update_id" jdbcType="INTEGER" property="updateId" />
-    <association property="user" column="create_id"
+    <collection property="userList" javaType="ArrayList" column="create_id"
                  select="com.lanou.mapper.SysUserMapper.selectByPrimaryKey"/>
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.lanou.bean.SysRole">

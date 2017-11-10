@@ -158,7 +158,13 @@
         var check=$("<td></td>").html("<input type='checkbox' value='' name=''>");
         var name=$("<td></td>").html(result.name);
         var createTime=$("<td></td>").html(result.createTime);
-        var user=$("<td></td>").html(result.user.username);
+
+		var userList = result.userList;
+		for (var i=0;i<userList.length;i++){
+			var username = userList[i].username;
+			var user=$("<td></td>").html(username);
+		}
+
 
         var sort=$("<td></td>").html(result.sort);
 

@@ -44,7 +44,16 @@ public class User {
     private Date updateTime;
 
     private Integer updateId;
+    private SysRole sysRole;
 
+
+    public SysRole getSysRole() {
+        return sysRole;
+    }
+
+    public void setSysRole(SysRole sysRole) {
+        this.sysRole = sysRole;
+    }
 
     @Override
     public String toString() {
@@ -70,6 +79,7 @@ public class User {
                 ", createId=" + createId +
                 ", updateTime=" + updateTime +
                 ", updateId=" + updateId +
+                ", sysRole=" + sysRole +
                 '}';
     }
 

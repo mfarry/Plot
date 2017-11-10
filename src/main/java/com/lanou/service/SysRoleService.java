@@ -2,6 +2,7 @@ package com.lanou.service;
 
 import com.github.pagehelper.PageInfo;
 import com.lanou.bean.SysRole;
+import com.lanou.bean.User;
 
 import java.util.List;
 
@@ -12,4 +13,6 @@ public interface SysRoleService {
     List<SysRole> getRolesAll();
 
     PageInfo<SysRole> getPageinfo(Integer pageNo, Integer pageSize);
+
+
 }

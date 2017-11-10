@@ -1,5 +1,6 @@
 package com.lanou.service;
 
+import com.github.pagehelper.PageInfo;
 import com.lanou.bean.User;
 
 import java.util.List;
@@ -12,6 +13,11 @@ public interface SysUserService {
     // 登录
     User selectlognameandpwd(String username);
 
-    // 显示全部admin
-    List<User> findalladmin();
+    List<User>findAll();
+
+    //分页
+    PageInfo<User> getPageInfo(Integer pageNo, Integer pageSize);
+
+    //    添加
+    Integer insert(User record);
 }

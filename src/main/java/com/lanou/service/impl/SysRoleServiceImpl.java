@@ -3,7 +3,9 @@ package com.lanou.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lanou.bean.SysRole;
+import com.lanou.bean.User;
 import com.lanou.mapper.SysRoleMapper;
+import com.lanou.mapper.SysUserMapper;
 import com.lanou.service.SysRoleService;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,8 @@ import java.util.List;
 public class SysRoleServiceImpl implements SysRoleService {
 @Resource
     private SysRoleMapper sysRoleMapper;
-
+    @Resource
+    private SysUserMapper sysUserMapper;
 
 
     @Override
