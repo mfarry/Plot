@@ -72,7 +72,7 @@
 
 </div>
 
-
+</body>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="lib/layer/2.4/layer.js"></script>
@@ -235,14 +235,36 @@
 
 
 		})
+	}
 
 
+//删除
+		function adminDelete() {
+//                var r = window.confirm("确定要删除此资费吗？");
+//                document.getElementById("operate_result_info").style.display = "block";
+			alert
+			var id = $(this).attr("num")
 
 
+			$.ajax({
+				url: "/admindelete",
+				data: {
+					id: id
+				},
+				success: function (result) {
+					if (result.data.status == 0) {
+
+						adminDelete(id)
+
+					}
+					else {
+						window.location.href = "/admin"
+					}
+				}
+			})
 
 
-
-
+		}
 
 
 	}
@@ -254,5 +276,6 @@
 
 
 </script>
+
 </body>
 </html>

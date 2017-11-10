@@ -13,11 +13,14 @@ public interface SysUserService {
     // 登录
     User selectlognameandpwd(String username);
 
-    List<User>findAll();
+    List<User> findAll();
 
     //分页
     PageInfo<User> getPageInfo(Integer pageNo, Integer pageSize);
 
-    //    添加
+    //添加
     Integer insert(User record);
+
+    //根据id删除
+    Integer deletByUserId(Integer id);
 }
