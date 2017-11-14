@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +35,10 @@ public class AdminController {
 
     @RequestMapping(value = "/adminadd")
     public String adminAdd(){return "admin-add";}
+
+
+    @RequestMapping(value = "/changepwd")
+    public String changePwd(){return "admin-password-edit";}
 
     @ResponseBody
     @RequestMapping(value = "/findAll")
@@ -89,6 +95,39 @@ public class AdminController {
         Integer integer = sysUserService.deletByUserId(id);
         return new AjaxResult(integer);
 
+    }
+
+    //通过id查找
+    @ResponseBody
+    @RequestMapping(value = "/findbyId")
+    public AjaxResult findById(HttpServletRequest request, HttpServletResponse response, Integer id) {
+
+        System.out.println(id);
+        User byId = sysUserService.findById(id);
+        System.out.println(byId);
+        request.getSession().setAttribute("userId", byId);
+
+        return new AjaxResult(byId);
+    }
+
+    //找到session中的id
+    @ResponseBody
+    @RequestMapping(value = "/getmodipwd")
+    public AjaxResult modi(HttpServletRequest request, HttpServletResponse response) {
+        User user = (User) request.getSession().getAttribute("userId");
+        return new AjaxResult(user);
+    }
+
+    //修改密码
+    @ResponseBody
+    @RequestMapping(value = "/updatepwd")
+    public AjaxResult updatePwd(User record){
+        String password = record.getPassword();
+        System.out.println(password);
+
+        Integer integer = sysUserService.updatePwd(record);
+        System.out.println(password);
+        return new AjaxResult(integer);
     }
 
 }
