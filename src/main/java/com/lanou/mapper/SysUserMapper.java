@@ -28,5 +28,5 @@ public interface SysUserMapper {
     List<User> findAll();
 
     //修改密码
-    int updatePwd(User record);
+    Integer updatePwd(User record);
 }

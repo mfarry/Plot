@@ -122,12 +122,12 @@ public class AdminController {
     @ResponseBody
     @RequestMapping(value = "/updatepwd")
     public AjaxResult updatePwd(User record){
-        String password = record.getPassword();
-        System.out.println(password);
 
-        Integer integer = sysUserService.updatePwd(record);
-        System.out.println(password);
-        return new AjaxResult(integer);
+        String password = new Md5Hash(record.getPassword()).toString();
+        record.setPassword(password);
+        Integer pwd = sysUserService.updatePwd(record);
+
+        return new AjaxResult(pwd);
     }
 
 }

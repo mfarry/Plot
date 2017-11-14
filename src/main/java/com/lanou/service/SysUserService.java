@@ -3,12 +3,14 @@ package com.lanou.service;
 import com.github.pagehelper.PageInfo;
 import com.lanou.bean.User;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * Created by dllo on 17/11/8.
  */
 public interface SysUserService {
+
 
     // 登录
     User selectlognameandpwd(String username);
@@ -24,14 +26,16 @@ public interface SysUserService {
     //根据id删除
     Integer deletByUserId(Integer id);
 
-
-
-    User selectByPrimaryKey(Integer id);
-
+    //修改密码
+    Integer updatePwd(User record);
 
     //根据id查找
     User findById(Integer id);
 
-    //修改密码
-    Integer updatePwd(User record);
+    User selectByPrimaryKey(Integer id);
+
+
+
+
+
 }
