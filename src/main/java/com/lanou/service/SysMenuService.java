@@ -16,4 +16,8 @@ public interface SysMenuService {
 
     PageInfo<SysMenu> getPageinfo(Integer pageNo, Integer pageSize);
 
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(SysMenu record);
 }

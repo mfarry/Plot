@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -57,4 +59,36 @@ public class MenuController {
     }
 
 
+    @ResponseBody
+@RequestMapping(value = "/delMenu")
+    public AjaxResult delMenu(Integer id){
+    int key = sysMenuService.deleteByPrimaryKey(id);
+    return new AjaxResult(key);
+
+
+}
+
+@ResponseBody
+@RequestMapping(value = "/getMenuById")
+public AjaxResult getMenuById(HttpServletRequest request, HttpServletResponse response,Integer id){
+    SysMenu sysMenu = sysMenuService.selectByPrimaryKey(id);
+    System.out.println(sysMenu);
+    request.getSession().setAttribute("menuAll",sysMenu);
+    return new AjaxResult(sysMenu);
+}
+
+@ResponseBody
+@RequestMapping(value = "/getMenuList")
+public AjaxResult getMenuList(HttpServletRequest request, HttpServletResponse response){
+    SysMenu menuAll = (SysMenu) request.getSession().getAttribute("menuAll");
+
+    return new AjaxResult(menuAll);
+}
+
+@ResponseBody
+@RequestMapping(value = "/addMenu")
+public AjaxResult addMenu(SysMenu record){
+    int i = sysMenuService.insert(record);
+    return new AjaxResult(i);
+}
 }
