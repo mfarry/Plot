@@ -23,4 +23,8 @@ public interface SysUserService {
 
     //根据id删除
     Integer deletByUserId(Integer id);
+
+
+
+    User selectByPrimaryKey(Integer id);
 }

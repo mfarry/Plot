@@ -41,8 +41,8 @@
 	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="l"><a href="javascript:;" onclick="datadel()"
 															   class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-        <a href="/adminadd" onclick="admin_add('添加管理员','admin-add.html','800','500')"
-		   class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span
+        <a href="/menuadd" onclick="admin_add('添加管理员','admin-add.html','800','500')"
+		   class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加菜单</a></span> <span
 			class="r">共有数据：<strong>2</strong> 条</span></div>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
@@ -144,6 +144,98 @@
 			layer.msg('已启用!', {icon: 6, time: 1000});
 		});
 	}
+
+	function getMenuAll() {
+		$.ajax({
+		    url:"/pageinfoMenu",
+            data: {
+                pageNo: 1,
+                pagesize: 5
+            },
+            success: function (result) {
+
+                var dataList = result.list;
+
+
+
+
+                $.each(dataList, function (i, domEle) {
+                    console.log(domEle);
+                    addNewTr(domEle)
+                })
+                page(result)
+            }
+        })
+    }
+
+    getMenuAll()
+
+    function page(data) {
+        $("#pages").empty()
+        var size = 5
+        if (data.isFirstPage) {
+            $("<a href='#'>上一页</a>").attr("no", 1).attr("size", size).click(pageNo).appendTo($("#pages"))
+        } else {
+            $("<a href='#'>上一页</a>").attr("no", data.prePage).attr("size", size).click(pageNo).appendTo($("#pages"))
+        }
+
+        for (var i = 1; i <= data.pages; i++) {
+            $("<a href='#'>" + i + "</a>").attr("no", i).attr("size", size).click(pageNo).appendTo($("#pages"))
+        }
+        if (data.isLastPage) {
+            $("<a href='#'>下一页</a>").attr("no", data.lastPage).attr("size", size).click(pageNo).appendTo($("#pages"))
+        } else {
+            $("<a href='#'>下一页</a>").attr("no", data.nextPage).attr("size", size).click(pageNo).appendTo($("#pages"))
+        }
+
+
+    }
+    function pageNo() {
+        var pageNo = $(this).attr("no")
+        var pageSize = $(this).attr("size")
+        $.ajax({
+            url: "/pageinfoMenu",
+            data: {
+                pageNo: pageNo,
+                pagesize: pageSize
+            },
+            success: function (result) {
+                console.log(result)
+                $(".emp").remove()
+                $.each(result.list, function (i, domEle) {
+                    addNewTr(domEle)
+                })
+
+                page(result)
+            }
+
+
+        })
+    }
+	function addNewTr(res) {
+        var checkbox = $("<td></td>").html("<input type='checkbox'>");
+        var name=$("<td></td>").html(res.name);
+        var ulkey=$("<td></td>").html(res.urlkey);
+        var upName=$("<td></td>").html("");
+        var type=$("<td></td>").html(res.type);
+
+        var url=$("<td></td>").html(res.url);
+        var createTime=$("<td></td>").html(res.createTime);
+        var username=$("<td></td>").html(res.user.username);
+        var sort=$("<td></td>").html(res.sort);
+        var status=$("<td></td>").html(res.status);
+
+        var upd=$("<td class='f-14'></td>").html("<a title='编辑' href='javascript:;'  style='text-decoration:none'><i class='Hui-iconfont'>&#xe6df;</i></a>");
+        var del=$("<td class='f-14'></td>").html("<a title='删除' href='javascript:;'  class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6e2;</i></a>");
+        var trob = $("<tr></tr>").attr("class", "emp").append(checkbox).append(name).append(ulkey)
+			.append(upName).append(type).append(url).append(createTime).append(username).append(sort)
+			.append(status).append(upd).append(del);
+        $("#dataList").append(trob)
+
+    }
+
+
+
 
 //	function addNewTr(msg) {
 //		var checkbox = $("<td></td>").html("<input type='checkbox'>")

@@ -34,7 +34,12 @@ public class AdminController {
     @RequestMapping(value = "/adminadd")
     public String adminAdd(){return "admin-add";}
 
-
+    @ResponseBody
+    @RequestMapping(value = "/findAll")
+    public AjaxResult findAll(){
+        List<User> all = sysUserService.findAll();
+        return new AjaxResult(all);
+    }
 
     //分页
     @ResponseBody
@@ -59,13 +64,23 @@ public class AdminController {
     @ResponseBody
     @RequestMapping(value = "/adminaddall")
     public AjaxResult adminAdd(User sysUser){
-        sysUser.setState(1);
+        sysUser.setState(0);
         sysUser.setCreateTime(new Date());
         String password = new Md5Hash(sysUser.getPassword()).toString();
         sysUser.setPassword(password);
         Integer insert = sysUserService.insert(sysUser);
         return new AjaxResult(insert);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/findAdminById")
+    public AjaxResult findAdminById(Integer id){
+        User user = sysUserService.selectByPrimaryKey(id);
+
+        return new AjaxResult(user);
+    }
+
+
 
     //根据id删除
     @ResponseBody
