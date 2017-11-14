@@ -23,7 +23,7 @@ public class RoleController {
 
     //    跳转到用户角色列表
     @RequestMapping(value = "/roles")
-    public String roles(){
+    public String roles() {
         return "admin-role";
     }
 
@@ -31,7 +31,7 @@ public class RoleController {
     //    获得全部角色
     @ResponseBody
     @RequestMapping(value = "/getRolesAll")
-    public AjaxResult getRolesAll(){
+    public AjaxResult getRolesAll() {
 
         List<SysRole> sysRoles = sysRoleService.getRolesAll();
         System.out.println(sysRoles);
@@ -41,10 +41,29 @@ public class RoleController {
 
     @ResponseBody
     @RequestMapping(value = "/pageinfo")
-    public PageInfo<SysRole> pageInfo(@RequestParam("pageNo") Integer pageNo , @RequestParam("pagesize") Integer pageSize){
+    public PageInfo<SysRole> pageInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pagesize") Integer pageSize) {
 
 
-        return sysRoleService.getPageinfo(pageNo,pageSize);
+        return sysRoleService.getPageinfo(pageNo, pageSize);
     }
+
+
+//    // 删除 
+//    @ResponseBody 
+//    @RequestMapping(value = "/deleteRole") 
+//    public AjaxResult deleteRole(Integer id) { 
+//        Integer reid = sysRoleService.deleteByRoleId(id); 
+//        System.out.println(reid); 
+//        return new AjaxResult(reid);
+//         }
+
+    // 删除
+    @ResponseBody
+    @RequestMapping(value = "/deleteRole")
+    public AjaxResult deleteRole(Integer id){
+        Integer reid = sysRoleService.deleteByRoleId(id);
+        return new AjaxResult(reid);
+    }
+
 
 }

@@ -33,6 +33,11 @@ public class SysRoleServiceImpl implements SysRoleService {
         return queryCost(pageNo,pageSize);
     }
 
+    @Override
+    public Integer deleteByRoleId(Integer id) {
+        return sysRoleMapper.deleteByPrimaryKey(id);
+    }
+
     public PageInfo<SysRole> queryCost(Integer pageNo, Integer pageSize){
 
 
