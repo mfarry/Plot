@@ -18,14 +18,19 @@ public interface SysUserMapper {
 
     int updateByPrimaryKeySelective(User record);
 
+
     int updateByPrimaryKey(User record);
 
     // 登录
     User selectlognameandpwd(String username);
 
-
     //显示全部
     List<User> findAll();
+
+    //修改密码
+    int updatePwd(User record);
+
+
 
 
 }

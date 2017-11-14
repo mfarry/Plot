@@ -160,7 +160,7 @@
 			var state=$("<td></td>").html("否")
 		}
 		var imp = $("<td></td>").html("<a  style='text-decoration:none' title='修改'><i class='Hui-iconfont'>&#xe631;</i></a>")
-		var imp1 = $("<td></td>").html("<a title='编辑' class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6df;</i></a>")
+		var imp1 = $("<td></td>").html("<a title='编辑' class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6df;</i></a>").click(getAdminId).attr("num1",msg.id);
 		var imp2 = $("<td></td>").html("<a title='删除' class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6e2;</i></a>").click(adminDelete).attr("num",msg.id);
 
 		var trob = $("<tr></tr>").attr("class", "emp").append(checkbox).append(userId).append(username).append(tel).append(email).append(rolename).append(createTime).append(state).append(imp).append(imp1).append(imp2)
@@ -240,12 +240,8 @@
 
 //删除
 		function adminDelete() {
-//                var r = window.confirm("确定要删除此资费吗？");
-//                document.getElementById("operate_result_info").style.display = "block";
 
 			var id = $(this).attr("num")
-
-
 			$.ajax({
 				url: "/admindelete",
 				data: {
@@ -257,7 +253,7 @@
 						adminDelete(id)
 
 					}
-					else {
+					else if (result.data.status==1){
 						window.location.href = "/admin"
 					}
 				}
@@ -265,6 +261,21 @@
 
 
 		}
+
+		//找到id
+	function getAdminId() {
+		var adminId=$(this).attr("num1")
+		$.ajax({
+			url:"/findbyId",
+			data:{
+				id:adminId
+			},
+			success:function (res) {
+				window.location.href="/changepwd";
+			}
+		})
+	}
+
 
 </script>
 

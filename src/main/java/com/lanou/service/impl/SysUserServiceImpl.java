@@ -42,6 +42,16 @@ public class SysUserServiceImpl implements SysUserService {
         return sysUserMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
+    public User findById(Integer id) {
+        return sysUserMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Integer updatePwd(User record) {
+        return sysUserMapper.updatePwd(record);
+    }
+
 
     //分页
     @Override

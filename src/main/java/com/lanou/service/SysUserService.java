@@ -23,4 +23,10 @@ public interface SysUserService {
 
     //根据id删除
     Integer deletByUserId(Integer id);
+
+    //根据id查找
+    User findById(Integer id);
+
+    //修改密码
+    Integer updatePwd(User record);
 }

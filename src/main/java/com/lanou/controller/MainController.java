@@ -53,6 +53,7 @@ public class MainController {
         // 获得response对象的输出流用于图像的写入
         OutputStream os = response.getOutputStream();
 
+
         // 将图片对象映射到输出流中
         VerifyCode.output(image, os);
 

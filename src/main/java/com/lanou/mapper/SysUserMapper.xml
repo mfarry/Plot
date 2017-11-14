@@ -313,6 +313,9 @@
       update_id = #{updateId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updatePwd">
+    UPDATE sys_user set password = #{password,jdbcType=VARCHAR} where id= #{id,jdbcType=INTEGER}
+  </update>
 
   <!--登录-->
   <select id="selectlognameandpwd" resultMap="BaseResultMap">
