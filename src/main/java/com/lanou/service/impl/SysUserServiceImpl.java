@@ -62,7 +62,7 @@ public class SysUserServiceImpl implements SysUserService {
 
         PageInfo<User> pageInfo = new PageInfo<User>(adminInfos);
 
-        System.out.println(pageInfo);
+//        System.out.println(pageInfo);
         return pageInfo;
     }
 

@@ -33,6 +33,12 @@ public class SysRoleServiceImpl implements SysRoleService {
         return queryCost(pageNo,pageSize);
     }
 
+    // 删除
+    @Override
+    public Integer deleteByRoleId(Integer id) {
+        return sysRoleMapper.deleteByPrimaryKey(id);
+    }
+
     public PageInfo<SysRole> queryCost(Integer pageNo, Integer pageSize){
 
 
@@ -44,13 +50,14 @@ public class SysRoleServiceImpl implements SysRoleService {
 
 //        获取全部的学员
         List<SysRole>sysRoles=sysRoleMapper.getRolesAll();
-        System.out.println(sysRoles+"::");
+//        System.out.println(sysRoles+"::");
 
 //        使用PageInfo对结果进行包装
         PageInfo<SysRole> pageInfo=new PageInfo<>(sysRoles);
 
-
-
         return pageInfo;
     }
+
+
+
 }

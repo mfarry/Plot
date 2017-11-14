@@ -27,6 +27,9 @@ public class RoleController {
         return "admin-role";
     }
 
+    @RequestMapping(value = "/updaterole")
+    public String updaterole(){return "admin-role-add";}
+
 
     //    获得全部角色
     @ResponseBody
@@ -34,17 +37,27 @@ public class RoleController {
     public AjaxResult getRolesAll(){
 
         List<SysRole> sysRoles = sysRoleService.getRolesAll();
-        System.out.println(sysRoles);
+//        System.out.println(sysRoles);
         return new AjaxResult(sysRoles);
     }
 
-
+// 分页
     @ResponseBody
     @RequestMapping(value = "/pageinfo")
     public PageInfo<SysRole> pageInfo(@RequestParam("pageNo") Integer pageNo , @RequestParam("pagesize") Integer pageSize){
-
-
         return sysRoleService.getPageinfo(pageNo,pageSize);
     }
+
+    // 删除
+    @ResponseBody
+    @RequestMapping(value = "/deleteRole")
+    public AjaxResult deleteRole(Integer id){
+        Integer reid = sysRoleService.deleteByRoleId(id);
+        System.out.println(reid);
+        return new AjaxResult(reid);
+
+    }
+
+    // 编辑
 
 }
