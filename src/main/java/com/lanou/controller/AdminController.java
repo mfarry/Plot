@@ -6,6 +6,7 @@ import com.lanou.bean.User;
 import com.lanou.service.SysRoleService;
 import com.lanou.service.SysUserService;
 import com.lanou.utils.AjaxResult;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,6 +61,8 @@ public class AdminController {
     public AjaxResult adminAdd(User sysUser){
         sysUser.setState(1);
         sysUser.setCreateTime(new Date());
+        String password = new Md5Hash(sysUser.getPassword()).toString();
+        sysUser.setPassword(password);
         Integer insert = sysUserService.insert(sysUser);
         return new AjaxResult(insert);
     }

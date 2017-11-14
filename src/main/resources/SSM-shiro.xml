@@ -47,7 +47,6 @@
                 /admin_list =anon
 
 
-
             </value>
         </property>
 
@@ -55,11 +54,11 @@
     </bean>
 
 
-
     <bean id="myRealm" class="com.lanou.shiro.MyRealm"/>
 
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="myRealm"/>
+        <property name="rememberMeManager" ref="rememberManager"/>
     </bean>
 
     <!--
@@ -67,20 +66,35 @@
         表单中的用户账号/密码/loginURL将会采用默认值,建议配置
     -->
     <bean id="formAuthenticationFilter"
-                    class="com.lanou.shiro.LoginVerifyCode">
+          class="com.lanou.shiro.LoginVerifyCode">
 
-    <property name="usernameParam" value="username"/>
+        <property name="usernameParam" value="username"/>
 
-    <property name="passwordParam" value="password"/>
+        <property name="passwordParam" value="password"/>
 
-    <!--判断用户名是否正确的地址(表单上的地址)-->
-    <property name="loginUrl" value="/loginsubmit"/>
+        <property name="rememberMeParam" value="rememberMe"/>
 
-</bean>
+        <!--判断用户名是否正确的地址(表单上的地址)-->
+        <property name="loginUrl" value="/loginsubmit"/>
+
+    </bean>
 
 
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="sid"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="-1"/>
+    </bean>
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="rememberMe"/>
+        <property name="httpOnly" value="true"/>
+        <property name="maxAge" value="2592000"/>
+    </bean>
 
-
+    <bean id="rememberManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUsOKTA3Kprsdag==')}"/>
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
 
 
 </beans>
