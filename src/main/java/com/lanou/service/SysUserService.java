@@ -27,4 +27,11 @@ public interface SysUserService {
 
 
     User selectByPrimaryKey(Integer id);
+
+
+    //根据id查找
+    User findById(Integer id);
+
+    //修改密码
+    Integer updatePwd(User record);
 }

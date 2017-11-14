@@ -48,6 +48,10 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
 
+    @Override
+    public User findById(Integer id) {
+        return sysUserMapper.selectByPrimaryKey(id);
+    }
 
 
 
@@ -73,6 +77,12 @@ public class SysUserServiceImpl implements SysUserService {
 
         System.out.println(pageInfo);
         return pageInfo;
+    }
+
+    //修改密码
+    @Override
+    public Integer updatePwd(User record) {
+        return sysUserMapper.updatePwd(record);
     }
 
 }

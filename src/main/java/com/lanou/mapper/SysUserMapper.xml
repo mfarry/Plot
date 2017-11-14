@@ -324,4 +324,9 @@
     SELECT <include refid="Base_Column_List" /> FROM sys_user
   </select>
 
+
+  <update id="updatePwd">
+    UPDATE sys_user set password = #{password,jdbcType=VARCHAR} where id= #{id,jdbcType=INTEGER}
+  </update>
+
 </mapper>
