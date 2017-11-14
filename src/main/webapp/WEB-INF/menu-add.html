@@ -167,7 +167,7 @@
 
 
     function addMenu() {
-
+var date=new Date();
         $.ajax({
             url:"/addMenu",
             data:{
@@ -177,6 +177,8 @@
                 type:$("#type").val(),
                 status:$("#status").val(),
                 parentId:1,
+                createId:1,
+                createTime:date,
                 url:$("#url").val(),
                 sort:$("#sort").val()
             },
