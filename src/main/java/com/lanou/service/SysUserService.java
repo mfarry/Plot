@@ -34,6 +34,9 @@ public interface SysUserService {
 
     User selectByPrimaryKey(Integer id);
 
+    //修改状态
+    Integer updateState(User record);
+
 
 
 

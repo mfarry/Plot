@@ -130,4 +130,13 @@ public class AdminController {
         return new AjaxResult(pwd);
     }
 
+    //更新状态
+    @ResponseBody
+    @RequestMapping(value = "/updateState")
+    public AjaxResult updateState(User record) {
+        Integer state = sysUserService.updateState(record);
+        return new AjaxResult(state);
+
+    }
+
 }

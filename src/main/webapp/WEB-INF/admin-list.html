@@ -159,7 +159,7 @@
 		}else if (msg.state==0){
 			var state=$("<td></td>").html("否")
 		}
-		var imp = $("<td></td>").html("<a  style='text-decoration:none' title='修改'><i class='Hui-iconfont'>&#xe631;</i></a>")
+		var imp = $("<td></td>").html("<a  style='text-decoration:none' title='修改'><i class='Hui-iconfont'>&#xe631;</i></a>").click(updateState).attr("num2",msg.id);
 		var imp1 = $("<td></td>").html("<a title='编辑' class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6df;</i></a>").click(getAdminId).attr("num1",msg.id);
 		var imp2 = $("<td></td>").html("<a title='删除' class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6e2;</i></a>").click(findAdminById).attr("num",msg.id);
 
@@ -287,11 +287,37 @@
 				id:adminId
 			},
 			success:function (res) {
-				window.location.href="/changepwd";
+				if (res.data.state==0){
+					window.location.href="/changepwd";
+				}else if (res.data.state){
+					window.location.href="/admin";
+				}
+
 			}
 		})
 	}
 
+	//启用
+	function updateState() {
+
+		var id = $(this).attr("num2")
+
+		var date=new Date()
+
+		$.ajax({
+			url: "/updateState",
+			data: {
+				id: id,
+				endTime:date
+			},
+			success: function (result) {
+
+				window.location.href = "/admin"
+
+			}
+
+		})
+	}
 
 </script>
 

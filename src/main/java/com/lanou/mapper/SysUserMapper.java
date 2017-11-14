@@ -29,4 +29,7 @@ public interface SysUserMapper {
 
     //修改密码
     Integer updatePwd(User record);
+
+    //修改状态
+    Integer updateStatus(User record);
 }

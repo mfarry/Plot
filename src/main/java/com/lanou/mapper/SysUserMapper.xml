@@ -326,7 +326,10 @@
 
 
   <update id="updatePwd">
-    UPDATE sys_user set password = #{password,jdbcType=VARCHAR} where id= #{id,jdbcType=INTEGER}
+    UPDATE sys_user set password = #{password,jdbcType=VARCHAR} ,update_time = #{updateTime,jdbcType=TIMESTAMP} where id= #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatus">
+    UPDATE sys_user set state=1 ,end_time = #{endTime,jdbcType=TIMESTAMP} where id=#{id,jdbcType=INTEGER}
   </update>
 
 </mapper>

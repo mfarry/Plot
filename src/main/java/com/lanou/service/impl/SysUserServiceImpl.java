@@ -47,9 +47,10 @@ public class SysUserServiceImpl implements SysUserService {
         return sysUserMapper.selectByPrimaryKey(id);
     }
 
-
-
-
+    @Override
+    public Integer updateState(User record) {
+        return sysUserMapper.updateStatus(record);
+    }
 
 
     //分页
