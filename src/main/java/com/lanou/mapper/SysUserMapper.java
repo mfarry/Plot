@@ -23,6 +23,8 @@ public interface SysUserMapper {
     // 登录
     User selectlognameandpwd(String username);
 
+    //批量删除
+    Integer deleteByQuery(Integer id);
 
     //显示全部
     List<User> findAll();

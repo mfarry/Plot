@@ -72,6 +72,9 @@
     delete from sys_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByQuery">
+    DELETE from sys_user WHERE id=#{id,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.lanou.bean.User">
     insert into sys_user (id, username, password, 
       realname, role_id, usertype, 

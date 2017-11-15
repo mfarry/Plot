@@ -139,4 +139,15 @@ public class AdminController {
 
     }
 
+    //批量删除
+    @ResponseBody
+    @RequestMapping(value = "/deletebyquery")
+    public AjaxResult deleteByQuery(String id){
+        String[] split = id.split(",");
+        for (int i = 0; i < split.length; i++) {
+            sysUserService.deleteByQuery(Integer.parseInt(split[i]));
+        }
+        return new AjaxResult(1);
+    }
+
 }

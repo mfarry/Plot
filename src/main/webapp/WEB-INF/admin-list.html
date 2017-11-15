@@ -10,7 +10,7 @@
 	<link rel="Bookmark" href="/favicon.ico">
 	<link rel="Shortcut Icon" href="/favicon.ico"/>
 	<!--[if lt IE 9]>
-	<script type="text/javascript" src="lib/html5shiv.js"></script>
+	<script type="text/javascript" src=lib/html5shiv.js"></script>
 	<script type="text/javascript" src="lib/respond.min.js"></script>
 	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css"/>
@@ -39,7 +39,7 @@
 		<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name="">
 		<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="l"><a href="javascript:;" onclick="datadel()"
+	<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="l"><a  onclick="deleteByQuery()"
 															   class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
         <a href="/adminadd" onclick="admin_add('添加管理员','admin-add.html','800','500')"
 		   class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span
@@ -83,10 +83,11 @@
 <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+<script src="../js/utils.js"></script>
 <script type="text/javascript">
 	/*
 	 参数解释：
-	 title	标题
+	 title	标题-
 	 url		请求的url
 	 id		需要操作的数据id
 	 w		弹出层宽度（缺省调默认值）
@@ -144,7 +145,7 @@
 	}
 
 	function addNewTr(msg) {
-		var checkbox = $("<td></td>").html("<input type='checkbox'>")
+		var checkbox = $("<td></td>").html("<input type='checkbox' value='"+msg.id+"'>")
 		var userId = $("<td></td>").html("<p>" + msg.id + "</p>")
 		var username = $("<td></td>").html("<p>" + msg.username + "</p>")
 		var tel = $("<td></td>").html("<p>" + msg.tel + "</p>")
@@ -153,7 +154,7 @@
 //        var rolename = $("<td></td>").html("<p>" + "null" + "</p>")
 
 
-		var createTime = $("<td></td>").html("<p>" + msg.createTime + "</p>")
+		var createTime = $("<td></td>").html("<p>" + getLocalTime(msg.createTime) + "</p>")
 		if (msg.state==1){
 			var state=$("<td></td>").html("是")
 		}else if (msg.state==0){
@@ -317,6 +318,28 @@
 			}
 
 		})
+	}
+
+	//批量删除
+	function deleteByQuery() {
+		var mle ="";
+
+		$("input[type='checkbox']:checked").each(function () {
+			mle += $(this).val()+","
+		})
+		alert(mle)
+		$.ajax({
+
+			url: "/deletebyquery",
+			data: {
+				id: mle
+			},
+			success: function (resu) {
+				window.location.href = "/admin";
+			}
+		})
+
+
 	}
 
 </script>

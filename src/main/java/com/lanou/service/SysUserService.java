@@ -37,6 +37,9 @@ public interface SysUserService {
     //修改状态
     Integer updateState(User record);
 
+    //批量删除
+    Integer deleteByQuery(Integer id);
+
 
 
 

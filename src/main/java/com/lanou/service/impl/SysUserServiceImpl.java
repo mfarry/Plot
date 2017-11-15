@@ -14,7 +14,7 @@ import java.util.List;
  * Created by dllo on 17/11/8.
  */
 @Service
-public class SysUserServiceImpl implements SysUserService {
+public class SysUserServiceImpl implements SysUserService{
 
 
     @Resource
@@ -50,6 +50,11 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public Integer updateState(User record) {
         return sysUserMapper.updateStatus(record);
+    }
+
+    @Override
+    public Integer deleteByQuery(Integer id) {
+        return sysUserMapper.deleteByQuery(id);
     }
 
 
