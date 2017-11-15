@@ -86,8 +86,8 @@ public AjaxResult getMenuList(HttpServletRequest request, HttpServletResponse re
 }
 
 @ResponseBody
-@RequestMapping(value = "/addMenu")
-public AjaxResult addMenu(SysMenu record){
+@RequestMapping(value = "/insertMenu")
+public AjaxResult insertMenu(SysMenu record){
     int i = sysMenuService.insert(record);
     return new AjaxResult(i);
 }
