@@ -20,4 +20,8 @@ public interface SysMenuService {
     int deleteByPrimaryKey(Integer id);
 
     int insert(SysMenu record);
+
+    int updateByPrimaryKey(SysMenu record);
+
+    int deleteAllMenu(Integer id);
 }

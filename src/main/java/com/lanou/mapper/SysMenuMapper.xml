@@ -211,8 +211,6 @@
       type = #{type,jdbcType=INTEGER},
       sort = #{sort,jdbcType=INTEGER},
       level = #{level,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_id = #{createId,jdbcType=INTEGER},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       update_id = #{updateId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
@@ -221,4 +219,9 @@
   <select id="getMenuAll" resultMap="MenuResultMap">
     SELECT <include refid="Base_Column_List" /> FROM sys_menu
   </select>
+
+  <delete id="deleteAllMenu" parameterType="java.lang.Integer">
+    delete from sys_menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>

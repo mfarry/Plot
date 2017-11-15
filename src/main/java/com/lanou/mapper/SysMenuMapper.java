@@ -18,4 +18,7 @@ public interface SysMenuMapper {
     int updateByPrimaryKey(SysMenu record);
 
     List<SysMenu> getMenuAll();
+
+    int deleteAllMenu(Integer id);
+
 }

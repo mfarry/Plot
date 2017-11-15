@@ -44,6 +44,16 @@ public class SysMenuServiceImpl implements SysMenuService {
         return sysMenuMapper.insert(record);
     }
 
+    @Override
+    public int updateByPrimaryKey(SysMenu record) {
+        return sysMenuMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public int deleteAllMenu(Integer id) {
+        return sysMenuMapper.deleteAllMenu(id);
+    }
+
     public PageInfo<SysMenu> queryCost(Integer pageNo, Integer pageSize){
 
 
