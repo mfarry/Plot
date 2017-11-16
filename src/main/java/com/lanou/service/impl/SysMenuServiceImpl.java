@@ -54,6 +54,11 @@ public class SysMenuServiceImpl implements SysMenuService {
         return sysMenuMapper.deleteAllMenu(id);
     }
 
+    @Override
+    public List<SysMenu> searchMenu(SysMenu record) {
+        return sysMenuMapper.searchMenu(record);
+    }
+
     public PageInfo<SysMenu> queryCost(Integer pageNo, Integer pageSize){
 
 

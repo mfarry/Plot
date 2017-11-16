@@ -24,4 +24,6 @@ public interface SysMenuService {
     int updateByPrimaryKey(SysMenu record);
 
     int deleteAllMenu(Integer id);
+
+    List<SysMenu> searchMenu(SysMenu record);
 }

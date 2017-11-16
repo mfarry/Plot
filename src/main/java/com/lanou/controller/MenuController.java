@@ -116,4 +116,25 @@ public class MenuController {
 
         return new AjaxResult(0);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/searchMenu")
+    public AjaxResult searchMenu(SysMenu record){
+        if (record.getName().equals("")){
+            record.setName(null);
+        }
+
+        if (record.getCreateTime().equals("")){
+            record.setCreateTime(null);
+        }
+        if (record.getUpdateTime().equals("")){
+            record.setUpdateTime(null);
+        }
+
+
+        List<SysMenu> sysMenus = sysMenuService.searchMenu(record);
+        return new AjaxResult(sysMenus);
+
+
+    }
 }

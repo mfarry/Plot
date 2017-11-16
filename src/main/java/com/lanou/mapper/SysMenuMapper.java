@@ -21,4 +21,5 @@ public interface SysMenuMapper {
 
     int deleteAllMenu(Integer id);
 
+List<SysMenu> searchMenu(SysMenu record);
 }

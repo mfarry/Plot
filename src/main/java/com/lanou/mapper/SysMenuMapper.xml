@@ -224,4 +224,19 @@
     delete from sys_menu
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <select id="searchMenu" resultMap="BaseResultMap">
+    SELECT * FROM sys_menu
+    <where>
+      <if test="name !=null">
+        AND name LIKE #{name}
+      </if>
+      <if test="createTime !=null">
+        and createTime between #{createTime} and #{updateTime}
+      </if>
+
+    </where>
+
+
+  </select>
 </mapper>
