@@ -36,14 +36,14 @@
 		-
 		<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax"
 			   class="input-text Wdate" style="width:120px;">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name="">
-		<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+		<input type="text" class="input-text" style="width:250px" placeholder="输入菜单名称" id="name" name="menu">
+		<button type="submit" class="btn btn-success" id="" name="" onclick="searchMenu()"><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
 	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="l"><a href="javascript:;" onclick="datadel()"
+	<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="l"><a href="javascript:;" onclick="delMenuAll()"
 															   class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
         <a href="/menuadd" onclick="admin_add('添加管理员','admin-add.html','800','500')"
 		   class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加菜单</a></span> <span
-			class="r">共有数据：<strong>2</strong> 条</span></div>
+			class="r">共有数据：<strong id="total"></strong> 条</span></div>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 		<tr>
@@ -158,7 +158,7 @@
 
 
 
-
+                $("#total").html(result.total)
                 $.each(dataList, function (i, domEle) {
                     console.log(domEle);
                     addNewTr(domEle)
@@ -202,18 +202,20 @@
             success: function (result) {
                 console.log(result)
                 $(".emp").remove()
+
                 $.each(result.list, function (i, domEle) {
                     addNewTr(domEle)
                 })
 
                 page(result)
+
             }
 
 
         })
     }
 	function addNewTr(res) {
-        var checkbox = $("<td></td>").html("<input type='checkbox'>");
+        var checkbox = $("<td></td>").html("<input type='checkbox' id='check' value='"+res.id+"'>");
         var name=$("<td></td>").html(res.name);
         var ulkey=$("<td></td>").html(res.urlkey);
         var upName=$("<td></td>").html("");
@@ -223,10 +225,18 @@
         var createTime=$("<td></td>").html(res.createTime);
         var username=$("<td></td>").html(res.user.username);
         var sort=$("<td></td>").html(res.sort);
-        var status=$("<td></td>").html(res.status);
 
-        var upd=$("<td class='f-14'></td>").html("<a title='编辑' href='javascript:;'  style='text-decoration:none'><i class='Hui-iconfont'>&#xe6df;</i></a>");
-        var del=$("<td class='f-14'></td>").html("<a title='删除' href='javascript:;'  class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6e2;</i></a>");
+        if (res.status==1){
+            var status=$("<td></td>").html("显示");
+
+		}
+        if (res.status==0){
+            var status=$("<td></td>").html("隐藏");
+
+        }
+
+        var upd=$("<td class='f-14'></td>").html("<a title='编辑' href='javascript:;'  style='text-decoration:none'><i class='Hui-iconfont'>&#xe6df;</i></a>").click(getAllmenuById).attr("id",res.id);
+        var del=$("<td class='f-14'></td>").html("<a title='删除' href='javascript:;'  class='ml-5' style='text-decoration:none'><i class='Hui-iconfont'>&#xe6e2;</i></a>").click(delMenu).attr("num",res.id);
         var trob = $("<tr></tr>").attr("class", "emp").append(checkbox).append(name).append(ulkey)
 			.append(upName).append(type).append(url).append(createTime).append(username).append(sort)
 			.append(status).append(upd).append(del);
@@ -235,6 +245,73 @@
     }
 
 
+    function delMenu() {
+	    var id=$(this).attr("num");
+		$.ajax({
+		    url:"/delMenu",
+			data:{
+		        id:id
+			},
+			success:function (res) {
+				window.location.href="/menuall"
+            }
+		})
+    }
+
+
+    function getAllmenuById() {
+        var mid=$(this).attr("id");
+	    $.ajax({
+	        url:"/getAllmenuById",
+			data:{
+	            id:mid
+			},
+			success:function (res) {
+				window.location.href="/menumodi";
+            }
+		})
+
+
+    }
+
+    function delMenuAll() {
+        var mle = "";
+
+        $("input[type='checkbox']:checked").each(function () {
+            mle += $(this).val() + ","
+        })
+
+		$.ajax({
+		    url:"/deleteAllMenu",
+			data:{
+		        id:mle
+			},
+			success:function (res) {
+				window.location.href="/menuall"
+            }
+		})
+
+    }
+
+
+    function searchMenu() {
+		$.ajax({
+		    url:"/searchMenu",
+			data:{
+		        name:$("#name").val(),
+                createTime:$("#datemin").val(),
+                updateTime:$("#datemax").val()
+			},
+			success:function (res) {
+				var data = res.data;
+            for (var i=0;i<data.length;i++){
+                addNewTr(data[i])
+
+			}
+
+		    }
+		})
+    }
 </script>
 
 </html>

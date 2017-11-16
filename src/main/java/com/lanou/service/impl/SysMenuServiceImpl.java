@@ -33,6 +33,32 @@ public class SysMenuServiceImpl implements SysMenuService {
     public PageInfo<SysMenu> getPageinfo(Integer pageNo, Integer pageSize) {
         return queryCost(pageNo,pageSize);
     }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return sysMenuMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int insert(SysMenu record) {
+        return sysMenuMapper.insert(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(SysMenu record) {
+        return sysMenuMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public int deleteAllMenu(Integer id) {
+        return sysMenuMapper.deleteAllMenu(id);
+    }
+
+    @Override
+    public List<SysMenu> searchMenu(SysMenu record) {
+        return sysMenuMapper.searchMenu(record);
+    }
+
     public PageInfo<SysMenu> queryCost(Integer pageNo, Integer pageSize){
 
 

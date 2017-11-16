@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -33,8 +35,13 @@ public class MenuController {
     }
 
     @RequestMapping(value = "/menuadd")
-    public String menuAdd(){
+    public String menuAdd() {
         return "menu-add";
+    }
+
+    @RequestMapping(value = "/menumodi")
+    public String menumodi() {
+        return "menu-modi";
     }
 
     @ResponseBody
@@ -50,11 +57,84 @@ public class MenuController {
 
     @ResponseBody
     @RequestMapping(value = "/pageinfoMenu")
-    public PageInfo<SysMenu> pageInfo(@RequestParam("pageNo") Integer pageNo , @RequestParam("pagesize") Integer pageSize){
+    public PageInfo<SysMenu> pageInfo(@RequestParam("pageNo") Integer pageNo, @RequestParam("pagesize") Integer pageSize) {
 
 
-        return sysMenuService.getPageinfo(pageNo,pageSize);
+        return sysMenuService.getPageinfo(pageNo, pageSize);
     }
 
 
+    @ResponseBody
+    @RequestMapping(value = "/delMenu")
+    public AjaxResult delMenu(Integer id) {
+        int key = sysMenuService.deleteByPrimaryKey(id);
+        return new AjaxResult(key);
+
+
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getAllmenuById")
+    public AjaxResult getAllmenuById(HttpServletRequest request, HttpServletResponse response, Integer id) {
+        SysMenu sysMenu = sysMenuService.selectByPrimaryKey(id);
+        request.getSession().setAttribute("menuAll", sysMenu);
+        return new AjaxResult(sysMenu);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getMenuList")
+    public AjaxResult getMenuList(HttpServletRequest request, HttpServletResponse response) {
+        SysMenu menuAll = (SysMenu) request.getSession().getAttribute("menuAll");
+
+        return new AjaxResult(menuAll);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/insertMenu")
+    public AjaxResult insertMenu(SysMenu record) {
+        int i = sysMenuService.insert(record);
+        return new AjaxResult(i);
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/updateMenu")
+    public AjaxResult updateMenu(SysMenu record) {
+        int i = sysMenuService.updateByPrimaryKey(record);
+        return new AjaxResult(i);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/deleteAllMenu")
+    public AjaxResult deleteAllMenu(@RequestParam("id") String mle){
+
+        String[] id = mle.split(",");
+        for (int i = 0; i < id.length; i++) {
+            int i1 = sysMenuService.deleteAllMenu(Integer.parseInt(id[i]));
+
+        }
+
+        return new AjaxResult(0);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/searchMenu")
+    public AjaxResult searchMenu(SysMenu record){
+        if (record.getName().equals("")){
+            record.setName(null);
+        }
+
+        if (record.getCreateTime().equals("")){
+            record.setCreateTime(null);
+        }
+        if (record.getUpdateTime().equals("")){
+            record.setUpdateTime(null);
+        }
+
+
+        List<SysMenu> sysMenus = sysMenuService.searchMenu(record);
+        return new AjaxResult(sysMenus);
+
+
+    }
 }
