@@ -329,4 +329,21 @@
     UPDATE sys_user set password = #{password,jdbcType=VARCHAR} where id= #{id,jdbcType=INTEGER}
   </update>
 
+  <select id="findByDate" resultMap="BaseResultMap">
+    SELECT *
+    FROM sys_user
+    <where>
+      <if test="name!=null">
+        AND username LIKE CONCAT('%',#{name},'%')
+      </if>
+      <if test="startime!=null">
+        AND create_time>#{startime}
+      </if>
+      <if test="endtime!=null">
+        AND #{endtime}>create_time
+      </if>
+    </where>
+  </select>
+
+
 </mapper>

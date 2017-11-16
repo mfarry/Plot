@@ -1,6 +1,7 @@
 package com.lanou.mapper;
 
 import com.lanou.bean.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,4 +30,9 @@ public interface SysUserMapper {
 
     //修改密码
     Integer updatePwd(User record);
+
+    // 搜索
+    List<User> findByDate(@Param("startime") String startime,
+                          @Param("endtime") String endtime,
+                          @Param("name") String name);
 }

@@ -47,9 +47,10 @@ public class SysUserServiceImpl implements SysUserService {
         return sysUserMapper.selectByPrimaryKey(id);
     }
 
-
-
-
+    @Override
+    public List<User> findByDate(String creatime, String endtime, String name) {
+        return sysUserMapper.findByDate(creatime, endtime, name);
+    }
 
 
     //分页

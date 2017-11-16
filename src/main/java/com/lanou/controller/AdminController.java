@@ -130,4 +130,17 @@ public class AdminController {
         return new AjaxResult(pwd);
     }
 
+
+    //根据日期模糊查询
+    @ResponseBody
+    @RequestMapping(value = "/findByDate")
+    public AjaxResult findByDate(@RequestParam("startime") String startime,
+                                 @RequestParam("endtime") String endtime,
+                                 @RequestParam("name") String name){
+
+        List<User> userList = sysUserService.findByDate(startime, endtime, name);
+        return new AjaxResult(userList);
+    }
+
+
 }

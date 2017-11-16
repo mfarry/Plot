@@ -34,6 +34,9 @@ public interface SysUserService {
 
     User selectByPrimaryKey(Integer id);
 
+    // 搜索
+    List<User> findByDate(String creatime,String endtime,String name);
+
 
 
 
