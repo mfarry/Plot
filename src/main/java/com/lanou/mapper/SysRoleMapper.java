@@ -19,6 +19,8 @@ public interface SysRoleMapper {
 
     int updateByPrimaryKey(SysRole record);
 
+    int delAllRole(Integer id);
+
 
     List<SysRole>getRolesAll();
 }

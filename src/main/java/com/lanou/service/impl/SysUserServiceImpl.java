@@ -52,6 +52,11 @@ public class SysUserServiceImpl implements SysUserService {
         return sysUserMapper.findByDate(creatime, endtime, username);
     }
 
+    @Override
+    public int delAllAdmin(Integer id) {
+        return sysUserMapper.delAllAdmin(id);
+    }
+
 
     //分页
     @Override

@@ -153,4 +153,17 @@ public class AdminController {
     }
 
 
+
+    @ResponseBody
+    @RequestMapping(value = "/delAllAdmin")
+    public AjaxResult delAllAdmin(@RequestParam("id") String mle){
+
+        String[] id = mle.split(",");
+        for (int i = 0; i < id.length; i++) {
+            int i1 = sysUserService.delAllAdmin(Integer.parseInt(id[i]));
+
+        }
+
+        return new AjaxResult(0);
+    }
 }

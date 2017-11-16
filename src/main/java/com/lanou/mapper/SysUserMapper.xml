@@ -351,5 +351,8 @@
     </where>
   </select>
 
-
+  <delete id="delAllAdmin" parameterType="java.lang.Integer">
+    delete from sys_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>

@@ -24,6 +24,7 @@ public interface SysUserMapper {
     // 登录
     User selectlognameandpwd(String username);
 
+    int delAllAdmin(Integer id);
 
     //显示全部
     List<User> findAll();

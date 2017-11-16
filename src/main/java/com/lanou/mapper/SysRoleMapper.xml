@@ -162,4 +162,10 @@
   <select id="getRolesAll" resultMap="BaseResultMap">
     SELECT  * FROM sys_role
   </select>
+
+
+  <delete id="delAllRole" parameterType="java.lang.Integer">
+    delete from sys_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>

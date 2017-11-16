@@ -14,7 +14,7 @@ public interface SysRoleService {
 
     PageInfo<SysRole> getPageinfo(Integer pageNo, Integer pageSize);
 
-
+    int delAllRole(Integer id);
     // 根据id删除
      Integer deleteByRoleId(Integer id);
 }

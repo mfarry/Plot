@@ -66,4 +66,18 @@ public class RoleController {
     }
 
 
+    @ResponseBody
+    @RequestMapping(value = "/delAllRole")
+    public AjaxResult delAllRole(@RequestParam("id") String mle){
+
+        String[] id = mle.split(",");
+        for (int i = 0; i < id.length; i++) {
+            int i1 = sysRoleService.delAllRole(Integer.parseInt(id[i]));
+
+        }
+
+        return new AjaxResult(0);
+    }
+
+
 }

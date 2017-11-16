@@ -37,6 +37,7 @@ public interface SysUserService {
     // 搜索
     List<User> findByDate(String creatime,String endtime,String username);
 
+    int delAllAdmin(Integer id);
 
 
 
