@@ -136,9 +136,19 @@ public class AdminController {
     @RequestMapping(value = "/findByDate")
     public AjaxResult findByDate(@RequestParam("startime") String startime,
                                  @RequestParam("endtime") String endtime,
-                                 @RequestParam("name") String name){
+                                 @RequestParam("username") String username){
 
-        List<User> userList = sysUserService.findByDate(startime, endtime, name);
+        if (username.equals("")){
+            username=null;
+        }
+        if (startime.equals("")){
+            startime=null;
+        }
+        if (endtime.equals("")){
+            endtime=null;
+        }
+
+        List<User> userList = sysUserService.findByDate(startime, endtime, username);
         return new AjaxResult(userList);
     }
 

@@ -6,6 +6,7 @@ import com.lanou.bean.SysMenu;
 import com.lanou.bean.SysRole;
 import com.lanou.mapper.SysMenuMapper;
 import com.lanou.service.SysMenuService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -55,9 +56,10 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public List<SysMenu> searchMenu(SysMenu record) {
-        return sysMenuMapper.searchMenu(record);
+    public List<SysMenu> findByMenu(@Param("startime") String startime, @Param("endtime") String endtime, @Param("name") String name) {
+        return sysMenuMapper.findByMenu(startime,endtime,name);
     }
+
 
     public PageInfo<SysMenu> queryCost(Integer pageNo, Integer pageSize){
 

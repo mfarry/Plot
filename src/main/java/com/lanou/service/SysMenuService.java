@@ -3,6 +3,7 @@ package com.lanou.service;
 import com.github.pagehelper.PageInfo;
 import com.lanou.bean.SysMenu;
 import com.lanou.bean.SysRole;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,5 +26,7 @@ public interface SysMenuService {
 
     int deleteAllMenu(Integer id);
 
-    List<SysMenu> searchMenu(SysMenu record);
+    List<SysMenu> findByMenu(@Param("startime") String startime,
+                             @Param("endtime") String endtime,
+                             @Param("name") String name);
 }

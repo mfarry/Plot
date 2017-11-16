@@ -34,5 +34,5 @@ public interface SysUserMapper {
     // 搜索
     List<User> findByDate(@Param("startime") String startime,
                           @Param("endtime") String endtime,
-                          @Param("name") String name);
+                          @Param("username") String username);
 }

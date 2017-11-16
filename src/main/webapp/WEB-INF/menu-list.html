@@ -27,7 +27,7 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span
 		class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
-											   href="javascript:location.replace(location.href);" title="刷新"><i
+											   href="/menuall" title="刷新"><i
 		class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 	<div class="text-c"> 日期范围：
@@ -37,7 +37,7 @@
 		<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax"
 			   class="input-text Wdate" style="width:120px;">
 		<input type="text" class="input-text" style="width:250px" placeholder="输入菜单名称" id="name" name="menu">
-		<button type="submit" class="btn btn-success" id="" name="" onclick="searchMenu()"><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+		<button type="submit" class="btn btn-success" id="" name="" onclick="findByMenu()"><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
 	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"><span class="l"><a href="javascript:;" onclick="delMenuAll()"
 															   class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
@@ -85,6 +85,7 @@
 <script type="text/javascript" src="lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="lib/laypage/1.2/laypage.js"></script>
+<script src="/js/utils.js"></script>
 <script type="text/javascript">
 	/*
 	 参数解释：
@@ -200,7 +201,7 @@
                 pagesize: pageSize
             },
             success: function (result) {
-                console.log(result)
+
                 $(".emp").remove()
 
                 $.each(result.list, function (i, domEle) {
@@ -222,7 +223,7 @@
         var type=$("<td></td>").html(res.type);
 
         var url=$("<td></td>").html(res.url);
-        var createTime=$("<td></td>").html(res.createTime);
+        var createTime=$("<td></td>").html(getLocalTime(res.createTime));
         var username=$("<td></td>").html(res.user.username);
         var sort=$("<td></td>").html(res.sort);
 
@@ -294,23 +295,32 @@
     }
 
 
-    function searchMenu() {
-		$.ajax({
-		    url:"/searchMenu",
-			data:{
-		        name:$("#name").val(),
-                createTime:$("#datemin").val(),
-                updateTime:$("#datemax").val()
-			},
-			success:function (res) {
-				var data = res.data;
-            for (var i=0;i<data.length;i++){
-                addNewTr(data[i])
 
-			}
 
-		    }
-		})
+
+
+    // 搜索
+    function findByMenu() {
+        $.ajax({
+            url: "/findByMenu",
+			type:"POST",
+            data: {
+                startime: $("#datemin").val(),
+                endtime: $("#datemax").val(),
+                name: $("#name").val()
+
+            },
+            success: function (result) {
+                $("#dataList").children().remove();
+                console.log(result.data);
+                for (var i = 0; i < result.data.length; i++) {
+                    var datu = result.data
+                    var da = datu[i]
+                    addNewTr(da)
+
+                }
+            }
+        })
     }
 </script>
 

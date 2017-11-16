@@ -48,8 +48,8 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public List<User> findByDate(String creatime, String endtime, String name) {
-        return sysUserMapper.findByDate(creatime, endtime, name);
+    public List<User> findByDate(String creatime, String endtime, String username) {
+        return sysUserMapper.findByDate(creatime, endtime, username);
     }
 
 

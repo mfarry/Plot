@@ -118,21 +118,25 @@ public class MenuController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/searchMenu")
-    public AjaxResult searchMenu(SysMenu record){
-        if (record.getName().equals("")){
-            record.setName(null);
+    @RequestMapping(value = "/findByMenu")
+    public AjaxResult findByMenu(@RequestParam("startime") String startime,
+                                 @RequestParam("endtime") String endtime,
+                                 @RequestParam("name") String name){
+
+        if (name.equals("")){
+            name=null;
         }
 
-        if (record.getCreateTime().equals("")){
-            record.setCreateTime(null);
+        if (startime.equals("")){
+           startime=null;
         }
-        if (record.getUpdateTime().equals("")){
-            record.setUpdateTime(null);
+        if (endtime.equals("")){
+           endtime=null;
         }
 
 
-        List<SysMenu> sysMenus = sysMenuService.searchMenu(record);
+        List<SysMenu> sysMenus = sysMenuService.findByMenu(name,startime,endtime);
+
         return new AjaxResult(sysMenus);
 
 

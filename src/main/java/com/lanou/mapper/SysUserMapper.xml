@@ -339,8 +339,8 @@
     SELECT *
     FROM sys_user
     <where>
-      <if test="name!=null">
-        AND username LIKE CONCAT('%',#{name},'%')
+      <if test="username!=null">
+        AND username LIKE CONCAT('%',#{username},'%')
       </if>
       <if test="startime!=null">
         AND create_time>#{startime}

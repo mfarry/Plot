@@ -225,18 +225,19 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <select id="searchMenu" resultMap="BaseResultMap">
+  <select id="findByMenu" resultMap="MenuResultMap">
     SELECT * FROM sys_menu
     <where>
-      <if test="name !=null">
-        AND name LIKE #{name}
+      <if test="name!=null">
+        AND name LIKE CONCAT('%',#{name},'%')
       </if>
-      <if test="createTime !=null">
-        and createTime between #{createTime} and #{updateTime}
+      <if test="startime!=null">
+      AND create_time>#{startime}
+    </if>
+      <if test="endtime!=null">
+        AND #{endtime}>create_time
       </if>
-
     </where>
-
 
   </select>
 </mapper>
